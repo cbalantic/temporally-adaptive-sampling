@@ -1,4 +1,4 @@
-# Recreating models for temporal adaptive sampling paper 
+# Recreating models for temporally adaptive sampling paper 
 
 # Call in necessary packages
 library(AMModels)
@@ -146,7 +146,8 @@ equations <- list(
 )
 
 # Read in the sampled 10% of the temporal data
-sampled.temporals <- readRDS(paste0(path, 'sampled-temporals-clean.RDS'))
+# (no lat longs are contained in these data)
+sampled.temporals <- readRDS(paste0(path, 'sampled-temporals.RDS'))
 
 # Add variables that accommodate circular (angular)
 # variables within the temporal data

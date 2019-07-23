@@ -1,4 +1,4 @@
-# Run the maxperhour experiment from temporal adaptive sampling paper
+# Run the maxperhour experiment from temporally adaptive sampling paper
 
 # Call in necessary packages
 library(AMModels)
@@ -23,7 +23,7 @@ conx <- dbConnect(drv = dbDriver('SQLite'), dbname = db.path)
 
 # OPTIMIZATION WITH MAX.PER.HOUR OPTION -- MARCH ==============================
 
-# Read in models if starting here: 
+# Read in models if starting here
 amml <- readRDS(paste0(path,'ammls/vocalization-models.RDS'))
 
 # Set the experiment folder
@@ -42,9 +42,10 @@ speciesIDs <- c('btgn', 'copo', 'coyote',
                 'ecdo', 'gaqu', 'leni', 
                 'phai', 'verd') 
 
+# Run through each set of constraints
 for (ex in 1:length(constraints)) {
   
-  # Reset tables:
+  # Reset tables
   dbClearTables(db.path, c('priorities', 'prioritization', 'schedule'))
   
   # Set equal weight priorities for all 8 species at all 133 locations
@@ -175,7 +176,7 @@ compare.dates <- melt(all.comparisons,
                       variable.name = 'Treatment')[,diff := NULL]
 compare.dates[,speciesID := toupper(speciesID)]
 
-# See pmax dates side by side:
+# See pmax dates side by side
 all.comparisons
 howmuchearlier <- sort(all.comparisons$diff)
 mean(howmuchearlier) 

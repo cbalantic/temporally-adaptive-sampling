@@ -11,7 +11,7 @@
 
 ## List of functions contained in this code: ##
 
-## Functions from AMMonitor (as of 2019-05-10)
+## Functions from AMMonitor (as of 2019-05-10):
 # - qryDeployment()
 # - qryPrioritization()
 # - scheduleAddVars()
@@ -20,7 +20,7 @@
 # - schedulePushHelper()
 # - simGlm()
 
-## Functions specific to reproducing the results in this paper
+## Functions specific to reproducing the results in this paper:
 # - ggVocModel(): A function to help with plotting
 # - predictFixed(): a function to run the "fixed" experiments
 # - trapezoidRule(): a function to calculate the trapezoid rule for AUC 
@@ -780,7 +780,6 @@ scheduleOptim <- function(db.path,
                              # Use sorted sp.ids vector to ensure alpha order match:
                              x = names(sp.ids)[i],  
                              as.list = FALSE)
-    # this.model <- ammod@model # not sure why this was a problem before?
     
     # Grab and store the model families for checking
     fam <- this.model$family$family
@@ -854,10 +853,10 @@ scheduleOptim <- function(db.path,
                               by = 60*60)
     rep.len <- length(date.range.covered)
     
-    # In our new SQLite system, we are not allowed to have 
+    # In the SQLite system, we are not allowed to have 
     # rows with a duplicate for locationID/date/time/type (foreign key constraint). 
     # Thus, we cannot have the two "01:00:00" entries that occur during fall-back of DST
-    # in the database at all, and one of those entries should be excluded. 
+    # in the database at all, and one of those entries must be excluded. 
     if (rep.len == 25) rep.len <- 24
     
     # Initialize a vector of 0s for each hour available tomorrow:
@@ -893,11 +892,7 @@ scheduleOptim <- function(db.path,
     # Compute which times to sample under 'simple' method:
     #  If daily.site.constraint <= 30, all samples will be allocated into the same hour
     #  (if sampling 1 minute at a time, we need to leave 1 minute between samples
-    #  for Julien's EasyVoice recorder scheduling process to work... I guess we could
-    #  also cluster the 1 minute samples into larger sampling periods; there are 
-    #  way too many decisions to make here.) But basically, why would you sample a
-    #  worse-scoring hour? You would lump all your samples into the same best-scoring hour
-    #  and sample more minutes from that best-scoring hour!
+    #  for the recording scheduling protocol to work properly in the field)
     if (optimization.approach == 'simple') {
       n.samp.hour <- ifelse(test = daily.site.constraint <= 30, 
                             yes = daily.site.constraint, 
@@ -914,7 +909,7 @@ scheduleOptim <- function(db.path,
         # If have more than 30 minutes of sampling, allot extra to next top scoring hours:
         # Total of 690 minutes allowed to sample each day (to allow 1 minute buffer
         # between each scheduled event, and allowing a 30 minute buffer for data 
-        # transmission of new schedule AND any recordings.)
+        # transmission of new schedule AND any recordings).
         if (daily.site.constraint > 690) {
           daily.site.constraint <- 690
           message('Constraining daily.site.constraint to 690.')
@@ -1092,9 +1087,6 @@ scheduleOptim <- function(db.path,
     optim.tomorrow.loc[ , pCurrent := pc.loc]
     
     # Compute the new weights:
-    # IF multiplying by yesterday's weights ("CURRENT WEIGHTS" experiment -- not quite as good as below) then we do: 
-    # weights.loc <- setkeyv(optim.today[locationID == this.location], 'speciesID')[,weight]
-    #If multiplying by init weight vector: (I have experimentally demonstrated that this is the superior method ==> we should be multiplying by the init weights vector, NOT the current weights vector from yesterday)
     weights.loc <- init.weights[locationID == this.location, weight]
     wts.raw <- (pmax.loc - pc.loc)*weights.loc
     wts.raw[wts.raw <= 0] <- 0 # negative values where target has been met become 0
@@ -1445,8 +1437,7 @@ simGlm <- function(db.path,
     
     DT <- data.table(temporal.data)
     
-    # Trying to clean up/remove large objects; 
-    # not sure if this will make the function any faster...
+    # Clean up/remove large objects just in case
     rm(temporal.data)
     
     # Disconnect from db when done grabbing data
@@ -1521,7 +1512,6 @@ simGlm <- function(db.path,
     
     # For binomial models:
     if (model.family == 'binomial') {
-      # http://slideplayer.com/slide/7828481/25/images/53/Generalized+Linear+Models.jpg
       
       # Calculate and assign logit values
       mod.DT$logit <- data.matrix(mod.DT) %*% coefs
@@ -1533,8 +1523,7 @@ simGlm <- function(db.path,
     
     # For poisson models:
     if (model.family == 'poisson') {
-      # http://slideplayer.com/slide/7828481/25/images/53/Generalized+Linear+Models.jpg
-      
+
       # Calculate and assign log values
       mod.DT$log <- data.matrix(mod.DT) %*% coefs
       
@@ -1775,9 +1764,6 @@ predictFixed <- function(exp.name,
       pd.loc <- apply(compute.pd.loc, 2, function(x) 1 - prod(1 - x, na.rm = TRUE))
       pc.loc <- 1 - (1 - fixed.loc[,pCurrent])*(1 - pd.loc)
       
-      # If 1-pc*pd results in 1s (ie it is the first day), then pc.loc == pd.loc
-      # pc.loc[pc.loc == 1] <- pd.loc[pc.loc == 1] # i dont remember what this was about??? 
-      
       # Compute pCurrent for tomorrow at this location:
       fixed.schedule.pc[locationID == loc & date == tomorrow, pCurrent := pc.loc]
       cat(k, '\n')
@@ -1792,6 +1778,8 @@ predictFixed <- function(exp.name,
 
 
 # trapezoidRule(): a function to calculate the trapezoid rule for AUC =========
+# Trapezoid rule calculation and code comes from R package pracma::trapz
+# https://www.rdocumentation.org/packages/pracma/versions/1.9.9/topics/trapz
 trapezoidRule <- function(x,y){
   m <- length(x)
   xp <- c(x, x[m:1])

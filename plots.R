@@ -67,7 +67,8 @@ plot.fodder.list <- list(btgn = list(),
                          toad = list(),
                          verd = list())
 
-# Grab categorical divergent plot colors: http://colorbrewer2.org/#type=qualitative&scheme=Paired&n=9
+# Grab categorical divergent plot colors: 
+# (http://colorbrewer2.org/#type=qualitative&scheme=Paired&n=9)
 species_plot_colors <- c('#a6cee3', '#1f78b4', '#b2df8a',
                          '#33a02c', '#fb9a99', '#e31a1c',
                          '#fdbf6f', '#ff7f00', '#cab2d6')
@@ -184,7 +185,8 @@ plot.fodder.list <- list(btgn = list(),
                          toad = list(),
                          verd = list())
 
-# Grab categorical divergent plot colors: http://colorbrewer2.org/#type=qualitative&scheme=Paired&n=9
+# Grab categorical divergent plot colors 
+# (http://colorbrewer2.org/#type=qualitative&scheme=Paired&n=9)
 species_plot_colors <- c('#a6cee3', '#1f78b4', '#b2df8a',
                          '#33a02c', '#fb9a99', '#e31a1c',
                          '#fdbf6f', '#ff7f00', '#cab2d6')

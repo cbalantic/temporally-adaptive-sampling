@@ -1,4 +1,4 @@
-# Run the "Full Year" experiment from temporal adaptive sampling paper
+# Run the "Full Year" experiment from temporally adaptive sampling paper
 
 # Call in necessary packages
 library(AMModels)
@@ -24,7 +24,7 @@ conx <- dbConnect(drv = dbDriver('SQLite'), dbname = db.path)
 
 # OPTIM TREATMENT -- FULL YEAR ==================================================
 
-# Read in models if starting here: 
+# Read in models if starting here
 amml <- readRDS(paste0(path,'ammls/vocalization-models.RDS'))
 
 # Set the experiment folder
@@ -46,9 +46,10 @@ speciesIDs <- c('btgn', 'copo', 'coyote',
                 'ecdo', 'gaqu', 'leni', 
                 'phai', 'toad', 'verd') 
 
+# Loop through each set of constraints
 for (ex in 1:length(constraints)) {
   
-  # Reset tables:
+  # Reset tables
   dbClearTables(db.path, c('priorities', 'prioritization', 'schedule'))
   
   # Set equal weight priorities for all 9 species at all 133 locations
@@ -86,23 +87,23 @@ for (ex in 1:length(constraints)) {
                   schedule = data.table(dbReadTable(conx, 'schedule')), 
                   run.time = total.time)
   saveRDS(results, paste0(exp.folder, exp.names.optim[ex]))             
-} # end looping thru sampling constraints
+} # end looping through sampling constraints
 
 
 
 # FIXED TREATMENT -- FULL YEAR ================================================
 
-# Read in models if starting here: 
+# Read in models if starting here
 amml <- readRDS(paste0(path,'ammls/vocalization-models.RDS'))
 
 # Set experiment folder
 exp.folder <- paste0(path, 'Results/Full_Year/')
 
-# Set experiment names: 
+# Set experiment names
 exp.names <- c('fixed-2-samples.RDS', 'fixed-5-samples.RDS', 'fixed-10-samples.RDS',
                'fixed-20-samples.RDS', 'fixed-30-samples.RDS', 'fixed-40-samples.RDS')
 
-# Set up a list of the fixed sampling times for all sampling efforts:
+# Set up a list of the fixed sampling times for all sampling efforts
 fixed.sampling.times.list <- list(two.samples = c('08:00:00', '23:00:00'),
                                   five.samples = c('02:00:00', '05:00:00', '06:00:00',
                                                    '08:00:00', '23:00:00'),
@@ -259,7 +260,7 @@ compare.dates <- melt(all.comparisons,
                       = 'Treatment')[,diff := NULL]
 compare.dates[,speciesID := toupper(speciesID)]
 
-# See pmax dates side by side:
+# See pmax dates side by side
 all.comparisons
 howmuchearlier <- sort(all.comparisons$diff)
 mean(howmuchearlier) 
@@ -278,9 +279,9 @@ full.year$all.comparisons$speciesID <- toupper(full.year$all.comparisons$species
 full.year # ==> create Appendix table in excel 
 
 
-# Not sure why the dates are suddenly misbehaving, but they are not always "equal" 
-# so I'm coercing them to character and back to date
-# https://stackoverflow.com/questions/21571744/compare-two-dates-in-r
+# Dates are not always "equal" 
+# (see: https://stackoverflow.com/questions/21571744/compare-two-dates-in-r)
+# so coerce them to character and back to date
 compare.dates[,value := as.Date(as.character(value))]
 
 # SAVE FOR EASY PLOTTING
