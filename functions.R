@@ -1,13 +1,19 @@
-# Functions specific to the paper
-# + all AMMonitor functions needed to reproduce the results
+###############################################################################
+#                                                                             #
+# All functions necessary to reproduce the experiments from:                  #
+#                                                                             #
+# Balantic, C. M., & Donovan, T. M. (2019). Temporally adaptive acoustic      #
+# sampling to maximize detection across a suite of focal wildlife species.    #
+# Accepted at Ecology and Evolution.                                          #
+#                                                                             #
+###############################################################################
 
-# AMMonitor functions as of 2019-05-10, bundled for Ecology and Evolution submission
-# Does not include all AMMonitor functions; only those necessary to run the manuscript experiments
-# Final function code and documentation may differ slightly. 
-# Package data are not included for function example documentation at this time; contact us if this is of interest to you.
+# Note: AMMonitor is now available at https://code.usgs.gov/vtcfwru/ammonitor
 
-# AMMonitor package is available at: https://code.usgs.gov/vtcfwru/ammonitor
-
+# The functions contained herein reflect pre-release AMMonitor functions as of
+# 2019-05-10, bundled for Ecology and Evolution submission. Only the AMMonitor 
+# functions necessary to run the manuscript experiments are contained here; 
+# code and at https://code.usgs.gov/vtcfwru/ammonitor may differ slightly.  
 
 ## List of functions contained in this code: ##
 

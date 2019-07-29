@@ -1,7 +1,12 @@
-# Recreating the Experiment for EcolEvol with latest version of AMMonitor
-
-# cbalantic
-# 2019-05-08
+###############################################################################
+#                                                                             #
+# Code to reproduce plots and tables from:                                    #
+#                                                                             #
+# Balantic, C. M., & Donovan, T. M. (2019). Temporally adaptive acoustic      #
+# sampling to maximize detection across a suite of focal wildlife species.    #
+# Accepted at Ecology and Evolution.                                          #
+#                                                                             #
+###############################################################################
 
 # Call in necessary packages
 library(AMModels)

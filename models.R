@@ -1,4 +1,12 @@
-# Recreating models for temporally adaptive sampling paper 
+###############################################################################
+#                                                                             #
+# All code necessary to recreate the vocalization models used in:             #
+#                                                                             #
+# Balantic, C. M., & Donovan, T. M. (2019). Temporally adaptive acoustic      #
+# sampling to maximize detection across a suite of focal wildlife species.    #
+# Accepted at Ecology and Evolution.                                          #
+#                                                                             #
+###############################################################################
 
 # Call in necessary packages
 library(AMModels)

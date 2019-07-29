@@ -1,4 +1,12 @@
-# Run the "March Only" experiment from temporally adaptive sampling paper
+###############################################################################
+#                                                                             #
+# A script to reproduce the "March Only" experiment from:                     #
+#                                                                             #
+# Balantic, C. M., & Donovan, T. M. (2019). Temporally adaptive acoustic      #
+# sampling to maximize detection across a suite of focal wildlife species.    #
+# Accepted at Ecology and Evolution.                                          #
+#                                                                             #
+###############################################################################
 
 # Call in necessary packages
 library(AMModels)

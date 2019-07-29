@@ -1,3 +1,13 @@
+###############################################################################
+#                                                                             #
+# A script to reproduce the appendix experiment from:                         #
+#                                                                             #
+# Balantic, C. M., & Donovan, T. M. (2019). Temporally adaptive acoustic      #
+# sampling to maximize detection across a suite of focal wildlife species.    #
+# Accepted at Ecology and Evolution.                                          #
+#                                                                             #
+###############################################################################
+
 # Run the maxperhour experiment from temporally adaptive sampling paper
 
 # Call in necessary packages
