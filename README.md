@@ -1,6 +1,6 @@
 This Github repository exists to support reproducibility of analyses from the following paper:
 
-Balantic, C. M., & Donovan, T. M. (2019). Temporally adaptive acoustic sampling to maximize detection across a suite of focal wildlife species" (accepted at Ecology and Evolution). 
+Balantic, C. M., & Donovan, T. M. (2019). Temporally adaptive acoustic sampling to maximize detection across a suite of focal wildlife species. Ecology and Evolution. DOI: 10.1002/ece3.5579 https://onlinelibrary.wiley.com/doi/full/10.1002/ece3.5579
 
 Github is not designed for file storage and some of the necessary files accompanying this paper exceed Github's upload limits. Instead, you can acquire accompanying files in the temporally-adaptive-sampling.zip available on Zenodo at https://zenodo.org/record/3354623 (DOI: 10.5281/zenodo.3354623). The SQLite databases are required to run the code. Note that you can reproduce the .RDS files in the "ammls" and "Results" folders by running the scripts, but the .RDS files are provided in case you wish to skip this step and prefer to focus on digging into the code itself. 
 
